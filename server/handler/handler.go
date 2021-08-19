@@ -5,7 +5,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"send-data-server/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -18,12 +17,12 @@ func NewUploadServer(gserver *grpc.Server) {
 
 type server struct{}
 
-func (s *server) Upload         (stream upload.UploadHandler_UploadServer) error {
+func (s *server) Upload(stream upload.UploadHandler_UploadServer) error {
 	err := os.MkdirAll("Sample", 0777)
 	if err != nil {
 		return err
 	}
-	file, err :=             os.Create(filepath.Join("Sample", "sample.mp4"))
+	file, err := os.Create(filepath.Join("Sample", "sample.mp4"))
 	defer file.Close()
 	if err != nil {
 		return err
@@ -40,8 +39,8 @@ func (s *server) Upload         (stream upload.UploadHandler_UploadServer) erro
 		file.Write(resp.VideoData)
 	}
 	err = stream.SendAndClose(&upload.UploadResponse{
-		UploadStatus: "OK"
-	 })
+		UploadStatus: "OK",
+	})
 	if err != nil {
 		return err
 	}

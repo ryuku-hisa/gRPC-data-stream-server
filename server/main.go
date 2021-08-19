@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/Ryuku-Hisa/gRPC-data-stream-server/proto"
+	"github.com/Ryuku-Hisa/gRPC-data-stream-server/server/handler"
 	"google.golang.org/grpc"
 )
 
@@ -19,7 +19,7 @@ func main() {
 	}
 	server := grpc.NewServer()
 
-	pb.NewUploadServer(server)
+	handler.NewUploadServer(server)
 	if err := server.Serve(lis); err != nil {
 		panic(err)
 	}

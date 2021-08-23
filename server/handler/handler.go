@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	pb "github.com/Ryuku-Hisa/gRPC-data-stream-client/proto"
+	pb "github.com/ryuku-hisa/gRPC-data-stream-client/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )

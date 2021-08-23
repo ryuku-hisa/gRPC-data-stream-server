@@ -11,7 +11,7 @@ import (
 )
 
 func NewUploadServer(gserver *grpc.Server) {
-	uploadserver := &server{}
+	var uploadserver pb.UploadHandlerServer
 	pb.RegisterUploadHandlerServer(gserver, uploadserver)
 	reflection.Register(gserver)
 }
@@ -24,10 +24,10 @@ func (s *server) Upload(stream pb.UploadHandler_UploadServer) error {
 		return err
 	}
 	file, err := os.Create(filepath.Join("Sample", "sample.mp4"))
-	defer file.Close()
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 
 	for {
 		resp, err := stream.Recv()

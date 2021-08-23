@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/Ryuku-Hisa/gRPC-data-stream-server/server/handler"
+	"github.com/ryuku-hisa/gRPC-data-stream-server/server/handler"
 	"google.golang.org/grpc"
 )
 

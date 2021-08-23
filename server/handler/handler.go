@@ -5,19 +5,20 @@ import (
 	"os"
 	"path/filepath"
 
+	pb "github.com/Ryuku-Hisa/gRPC-data-stream-client/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 func NewUploadServer(gserver *grpc.Server) {
 	uploadserver := &server{}
-	upload.RegisterUploadHandlerServer(gserver, uploadserver)
+	pb.RegisterUploadHandlerServer(gserver, uploadserver)
 	reflection.Register(gserver)
 }
 
 type server struct{}
 
-func (s *server) Upload(stream upload.UploadHandler_UploadServer) error {
+func (s *server) Upload(stream pb.UploadHandler_UploadServer) error {
 	err := os.MkdirAll("Sample", 0777)
 	if err != nil {
 		return err
@@ -38,7 +39,7 @@ func (s *server) Upload(stream upload.UploadHandler_UploadServer) error {
 		}
 		file.Write(resp.VideoData)
 	}
-	err = stream.SendAndClose(&upload.UploadResponse{
+	err = stream.SendAndClose(&pb.UploadResponse{
 		UploadStatus: "OK",
 	})
 	if err != nil {

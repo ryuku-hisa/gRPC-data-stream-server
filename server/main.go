@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net"
 
@@ -9,7 +10,7 @@ import (
 )
 
 const (
-	port = "50051"
+	port = ":50051"
 )
 
 func main() {
@@ -20,7 +21,8 @@ func main() {
 	server := grpc.NewServer()
 
 	handler.NewUploadServer(server)
+	fmt.Println("done")
 	if err := server.Serve(lis); err != nil {
-		panic(err)
+		log.Fatalf("server ended: %s", err)
 	}
 }

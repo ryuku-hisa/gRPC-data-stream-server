@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net"
 
@@ -21,7 +20,6 @@ func main() {
 	server := grpc.NewServer()
 
 	handler.NewUploadServer(server)
-	fmt.Println("done")
 	if err := server.Serve(lis); err != nil {
 		log.Fatalf("server ended: %s", err)
 	}

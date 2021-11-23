@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"io"
+  "io"
 	"os"
 	"path/filepath"
 
@@ -19,7 +19,7 @@ func NewUploadServer(gserver *grpc.Server) {
 type server struct{}
 
 func (s *server) Upload(stream pb.UploadHandler_UploadServer) error {
-	err := os.MkdirAll("Sample", 0777)
+  err := os.MkdirAll("Sample", 0777)
 	if err != nil {
 		return err
 	}
@@ -29,7 +29,8 @@ func (s *server) Upload(stream pb.UploadHandler_UploadServer) error {
 	}
 	defer file.Close()
 
-	for {
+  var int cnt = 0;
+  for {
 		resp, err := stream.Recv()
 		if err == io.EOF {
 			break
@@ -38,6 +39,7 @@ func (s *server) Upload(stream pb.UploadHandler_UploadServer) error {
 			return err
 		}
 		file.Write(resp.VideoData)
+    fmt.Println(++cnt)
 	}
 	err = stream.SendAndClose(&pb.UploadResponse{
 		UploadStatus: "OK",

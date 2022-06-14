@@ -15,7 +15,7 @@ const (
 
 func main() {
   fmt.Printf("Preparing...\n\n")
-  
+
   lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("faild to listen: %v", err)

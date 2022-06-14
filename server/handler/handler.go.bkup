@@ -4,26 +4,23 @@ import (
   "io"
 	"os"
 	"path/filepath"
-  "fmt"
 
-	pb "github.com/ryuku-hisa/gRPC-data-stream-server/proto"
+	pb "github.com/ryuku-hisa/gRPC-data-stream-client/proto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 type server struct{
-  pb.UnimplementedGreeterServer
+    pb.UnimplementedGreeterServer
 }
 
 func NewUploadServer(gserver *grpc.Server) {
-  fmt.Println("called NewUploadServer")
   uploadserver := &server{}
-  pb.RegisterUploadHandlerServer(gserver, uploadserver)
+  upload.RegisterUploadHandlerServer(gserver, uploadserver)
   reflection.Register(gserver)
 }
 
 func (s *server) Upload(stream pb.UploadHandler_UploadServer) error {
-  fmt.Println("called Upload")
   err := os.MkdirAll("Sample", 0777)
 	if err != nil {
 		return err

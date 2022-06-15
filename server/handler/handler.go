@@ -16,10 +16,9 @@ type server struct{
 }
 
 func NewUploadServer(gserver *grpc.Server) {
-  fmt.Println("called NewUploadServer")
-  uploadserver := &server{}
-  pb.RegisterUploadHandlerServer(gserver, uploadserver)
-  reflection.Register(gserver)
+//  uploadserver := &server{}
+//  pb.RegisterUploadHandlerServer(gserver, uploadserver)
+//  reflection.Register(gserver)
 }
 
 func (s *server) Upload(stream pb.UploadHandler_UploadServer) error {
